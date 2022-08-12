@@ -16,6 +16,11 @@
               style="height: 100%;"
               router
           >
+            <el-menu-item index="/">
+              <el-icon ><HomeFilled /></el-icon>
+              <span>首页</span>
+            </el-menu-item>
+
             <el-sub-menu index="1">
               <template #title>
                 <el-icon ><Edit /></el-icon>
@@ -25,40 +30,39 @@
               <el-menu-item index="/controlMenu/upDown">代装代卸</el-menu-item>
               <el-menu-item index="/controlMenu/qiangCom">强制命令</el-menu-item>
               <el-menu-item index="/controlMenu/qiangDu">装卸强度</el-menu-item>
-              <el-menu-item index="1-5">强制故障</el-menu-item>
-              <el-menu-item index="1-6">装卸量对比</el-menu-item>
-              <el-menu-item index="1-7">定铲派车</el-menu-item>
-              <el-menu-item index="1-8">铲锁定卸点</el-menu-item>
-              <el-menu-item index="1-9">配矿计划</el-menu-item>
+              <el-menu-item index="/controlMenu/qiangGu">强制故障</el-menu-item>
+              <el-menu-item index="/controlMenu/dingpai">定铲派车</el-menu-item>
+              <el-menu-item index="/controlMenu/dingxie">铲锁定卸点</el-menu-item>
+              <el-menu-item index="/controlMenu/oreRatio">配矿计划</el-menu-item>
             </el-sub-menu>
             <el-sub-menu index="2">
               <template #title>
                 <el-icon ><icon-menu /></el-icon>
                 <span>数据查询</span>
               </template>
-              <el-menu-item index="2-1">系统日志查询</el-menu-item>
-              <el-menu-item index="2-2">系统提示信息</el-menu-item>
-              <el-menu-item index="2-3">报警提示查询</el-menu-item>
-              <el-menu-item index="2-4">产量数据查询</el-menu-item>
-              <el-menu-item index="2-5">设备实时状态</el-menu-item>
+              <el-menu-item index="/controlMenu/logQuery">系统日志查询</el-menu-item>
+              <el-menu-item index="/controlMenu/infoQuery">系统提示信息</el-menu-item>
+              <el-menu-item index="/controlMenu/alarmQuery">报警提示查询</el-menu-item>
+              <el-menu-item index="/controlMenu/yieldQuery">产量数据查询</el-menu-item>
+              <el-menu-item index="/controlMenu/deviceStatus">设备实时状态</el-menu-item>
             </el-sub-menu>
             <el-sub-menu index="3">
               <template #title>
                 <el-icon ><document /></el-icon>
                 <span>通讯菜单</span>
               </template>
-              <el-menu-item index="3-1">下发短信</el-menu-item>
-              <el-menu-item index="3-2">通讯状态</el-menu-item>
-              <el-menu-item index="3-3">下发基础信息</el-menu-item>
-              <el-menu-item index="3-4">请示自动回复</el-menu-item>
+              <el-menu-item index="/controlMenu/sendMessage">下发短信</el-menu-item>
+              <el-menu-item index="/controlMenu/comState">通讯状态</el-menu-item>
+              <el-menu-item index="/controlMenu/sendBasic">下发基础信息</el-menu-item>
+              <el-menu-item index="/controlMenu/autoReply">请示自动回复</el-menu-item>
             </el-sub-menu>
             <el-sub-menu index="4">
               <template #title>
                 <el-icon ><setting /></el-icon>
                 <span>系统维护</span>
               </template>
-              <el-menu-item index="4-1">用户信息设置</el-menu-item>
-              <el-menu-item index="4-2">车辆管理</el-menu-item>
+              <el-menu-item index="/controlMenu/userConfig">用户信息设置</el-menu-item>
+              <el-menu-item index="/controlMenu/truckManage">车辆管理</el-menu-item>
             </el-sub-menu>
           </el-menu>
         </el-aside>
@@ -77,6 +81,7 @@ import {
   Menu as IconMenu,
   Edit,
   Setting,
+  HomeFilled
 } from '@element-plus/icons-vue'
 
 import * as d3 from 'd3';
@@ -87,6 +92,7 @@ export default {
     IconMenu,
     Edit,
     Setting,
+    HomeFilled
   },
   name: "Menu",
   methods:{

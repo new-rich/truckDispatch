@@ -6,11 +6,11 @@
         <img class="infoHeaderImg" :src="headImg" alt="">
         <div class="item1" @click="twoDClick">
           <p class="titleP">二维显示</p>
-          <img :src="kImg1" alt="">
+          <img :src="this.is2DShow == true ? kImg1_select : kImg1_unselect" alt="">
         </div>
         <div class="item2" @click="threeDClick">
           <p class="titleP">三维显示</p>
-          <img :src="kImg2" alt="">
+          <img :src="this.is3DShow == true ? kImg2_select : kImg2_unselect" alt="">
         </div>
       </div>
       </div>
@@ -218,11 +218,10 @@
             <el-menu-item index="/controlMenu/upDown">代装代卸</el-menu-item>
             <el-menu-item index="/controlMenu/qiangCom">强制命令</el-menu-item>
             <el-menu-item index="/controlMenu/qiangDu">装卸强度</el-menu-item>
-            <el-menu-item index="1-5">强制故障</el-menu-item>
-            <el-menu-item index="1-6">装卸量对比</el-menu-item>
-            <el-menu-item index="1-7">定铲派车</el-menu-item>
-            <el-menu-item index="1-8">铲锁定卸点</el-menu-item>
-            <el-menu-item index="1-9">配矿计划</el-menu-item>
+            <el-menu-item index="/controlMenu/qiangGu">强制故障</el-menu-item>
+            <el-menu-item index="/controlMenu/dingpai">定铲派车</el-menu-item>
+            <el-menu-item index="/controlMenu/dingxie">铲锁定卸点</el-menu-item>
+            <el-menu-item index="/controlMenu/oreRatio">配矿计划</el-menu-item>
             <!--            <el-sub-menu index="1-6">-->
             <!--              <template #title>item four</template>-->
             <!--              <el-menu-item index="1-4-1">item one</el-menu-item>-->
@@ -233,29 +232,29 @@
               <el-icon ><icon-menu /></el-icon>
               <span>数据查询</span>
             </template>
-            <el-menu-item index="2-1">系统日志查询</el-menu-item>
-            <el-menu-item index="2-2">系统提示信息</el-menu-item>
-            <el-menu-item index="2-3">报警提示查询</el-menu-item>
-            <el-menu-item index="2-4">产量数据查询</el-menu-item>
-            <el-menu-item index="2-5">设备实时状态</el-menu-item>
+            <el-menu-item index="/controlMenu/logQuery">系统日志查询</el-menu-item>
+            <el-menu-item index="/controlMenu/infoQuery">系统提示信息</el-menu-item>
+            <el-menu-item index="/controlMenu/alarmQuery">报警提示查询</el-menu-item>
+            <el-menu-item index="/controlMenu/yieldQuery">产量数据查询</el-menu-item>
+            <el-menu-item index="/controlMenu/deviceStatus">设备实时状态</el-menu-item>
           </el-sub-menu>
           <el-sub-menu index="3">
             <template #title>
               <el-icon ><document /></el-icon>
               <span>通讯菜单</span>
             </template>
-            <el-menu-item index="3-1">下发短信</el-menu-item>
-            <el-menu-item index="3-2">通讯状态</el-menu-item>
-            <el-menu-item index="3-3">下发基础信息</el-menu-item>
-            <el-menu-item index="3-4">请示自动回复</el-menu-item>
+            <el-menu-item index="/controlMenu/sendMessage">下发短信</el-menu-item>
+            <el-menu-item index="/controlMenu/comState">通讯状态</el-menu-item>
+            <el-menu-item index="/controlMenu/sendBasic">下发基础信息</el-menu-item>
+            <el-menu-item index="/controlMenu/autoReply">请示自动回复</el-menu-item>
           </el-sub-menu>
           <el-sub-menu index="4">
             <template #title>
               <el-icon ><setting /></el-icon>
               <span>系统维护</span>
             </template>
-            <el-menu-item index="4-1">用户信息设置</el-menu-item>
-            <el-menu-item index="4-2">车辆管理</el-menu-item>
+            <el-menu-item index="/controlMenu/userConfig">用户信息设置</el-menu-item>
+            <el-menu-item index="/controlMenu/truckManage">车辆管理</el-menu-item>
           </el-sub-menu>
         </el-menu>
       </div>
@@ -286,8 +285,10 @@ export default{
   data() {
     return{
       headImg:require('@/assets/head_middle.png'),
-      kImg1:require('@/assets/head_left.png'),
-      kImg2:require('@/assets/head_right.png'),
+      kImg1_select:require('@/assets/head_left_sel.png'),
+      kImg2_select:require('@/assets/head_right_sel.png'),
+      kImg1_unselect:require('@/assets/head_left_unsel.png'),
+      kImg2_unselect:require('@/assets/head_right_unsel.png'),
       bgImg: require('@/assets/bg2.png'),
       bgImg2: require('@/assets/bg.png'),
       caiIcon: require('@/assets/cai.svg'),
@@ -539,7 +540,7 @@ export default{
         margin: 0;
         font-size: 18px;
         width: 100%;
-        color: #FFD200;
+        color: #009CFF;
         right: 50%;
         line-height: 55px;
         transform: translateX(50%);

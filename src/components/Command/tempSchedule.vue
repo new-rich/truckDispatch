@@ -1,5 +1,9 @@
 <template>
   <div class="main">
+      <div class="title">
+        <span>临时调度</span>
+      </div>
+
     <div class="query">
       <div class="input">
         <el-input
@@ -47,7 +51,7 @@
     </div>
     <div class="table">
       <el-table :data="tableData" border size="large">
-        <el-table-column fixed prop="number" label="车辆编号" min-width="2">
+        <el-table-column fixed prop="number" label="车辆编号" min-width="2" align="center">
           <template #default="scope">
             <el-popover effect="light" trigger="hover" placement="top" width="auto">
               <template #reference>
@@ -56,12 +60,12 @@
             </el-popover>
           </template>
         </el-table-column>
-        <el-table-column prop="name" label="车辆名称" min-width="2" />
-        <el-table-column prop="state" label="当前状态" min-width="2" />
-        <el-table-column prop="position" label="当前位置" min-width="3" />
-        <el-table-column prop="address" label="Address" min-width="5" />
-        <el-table-column prop="zip" label="Zip" min-width="3" />
-        <el-table-column fixed="right" label="操作" min-width="3">
+        <el-table-column prop="name" label="车辆名称" min-width="2" align="center"/>
+        <el-table-column prop="state" label="当前状态" min-width="2" align="center"/>
+        <el-table-column prop="position" label="当前位置" min-width="3" align="center"/>
+        <el-table-column prop="address" label="Address" min-width="5" align="center"/>
+        <el-table-column prop="zip" label="Zip" min-width="3" align="center"/>
+        <el-table-column fixed="right" label="操作" min-width="3" align="center">
           <template #default>
             <el-button link type="primary" size="small" @click="handleClick">进行调度</el-button>
             <el-button link type="primary" size="small">停止工作</el-button>
@@ -169,7 +173,7 @@ const tableData = [
 ]
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 
 .el-scrollbar__view{
   display: inline !important;
@@ -178,6 +182,20 @@ const tableData = [
   width:100%;
   height:100%;
   background-color: #f3f4f9;
+
+  .title {
+    width: 100%;
+    height: 10%;
+
+    span {
+      color: #496174;
+      float: left;
+      font-size: 28px;
+      font-weight: bold;
+      margin-left: 10px;
+      line-height: 50px;
+    }
+  }
 
   .query{
     position: relative;
@@ -197,6 +215,9 @@ const tableData = [
         width: 100%;
         height: 100%;
         font-size: 16px;
+
+        text-align:center;
+        text-align-last: center;
       }
     }
 
@@ -205,6 +226,8 @@ const tableData = [
       height: 60%;
       margin-left: 2%;
       margin-top: 5px;
+      text-align: center;
+      text-align-last: center;
 
       .el-select{
         width: 100%;

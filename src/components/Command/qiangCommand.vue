@@ -18,37 +18,33 @@
           <div class="selectContent">
             <div class="sCard">
               <div class="selectCard">
-                <el-card class="box-card">
+                <el-card class="box-card" :body-style="{ padding: 0 }">
                   <template #header>
                     <div class="card-header">
                       <span>选择具体目标</span>
                     </div>
                   </template>
-                  <div class="select_item">
-                    <span>矿车#1</span>
+                  <div class="select_item" v-for='(item,index) in target_arr' :style="item.isActive == true ? { backgroundColor: '#009CFF' } : { backgroundColor: 'white' }" @click='target_select(index)' :key="index">
+                    <span>{{ item.name }}</span>
                   </div>
-                  <div class="select_item"  style="background-color: #009CFF">
-                    <span>矿车#2</span>
-                  </div>
-                  <div class="select_item">
-                    <span>装卸点#3</span>
-                  </div>
-                  <div class="select_item">
-                    <span>装卸点#4</span>
-                  </div>
+<!--                  <div class="select_item"  style="background-color: #009CFF">-->
+<!--                    <span>矿车#2</span>-->
+<!--                  </div>-->
+<!--                  <div class="select_item">-->
+<!--                    <span>装卸点#3</span>-->
+<!--                  </div>-->
+<!--                  <div class="select_item">-->
+<!--                    <span>装卸点#4</span>-->
+<!--                  </div>-->
                 </el-card>
               </div>
-<!--              <div class="card_result">-->
-<!--                <span>选中装卸点：</span>-->
-<!--                <span>装卸点#3</span>-->
-<!--              </div>-->
             </div>
           </div>
         </div>
         <div class="rightPanel">
           <div class="selectControl">
             <div class="border">
-              <span class="border_title">中心控制系统初始化和复位</span>
+              <span class="border_title">中心控制初始化和复位</span>
               <el-button type="primary" :icon="Remove" size="large">系统初始化</el-button>
               <el-button type="primary" :icon="Refresh" size="large">系统复位</el-button>
               <el-button plain size="large">备份数据库</el-button>
@@ -56,36 +52,36 @@
           </div>
           <div class="statusCard">
             <div class="selectCard">
-              <el-card class="box-card">
+              <el-card class="box-card" :body-style="{ padding: 0 }">
                 <template #header>
                   <div class="card-header">
                     <span>选择状态命令</span>
                   </div>
                 </template>
-                <div class="select_item">
-                  <span>司机休息</span>
+                <div class="select_item" v-for='(item,index) in command_arr' :style="item.isActive == true ? { backgroundColor: '#009CFF' } : { backgroundColor: 'white' }" @click='command_select(index)' :key="index">
+                  <span>{{ item.name }}</span>
                 </div>
-                <div class="select_item">
-                  <span>吃饭</span>
-                </div>
-                <div class="select_item" style="background-color: #009CFF">
-                  <span>干零活</span>
-                </div>
-                <div class="select_item">
-                  <span>加油</span>
-                </div>
-                <div class="select_item">
-                  <span>加油</span>
-                </div>
-                <div class="select_item">
-                  <span>避炮</span>
-                </div>
-                <div class="select_item">
-                  <span>正常停机</span>
-                </div>
-                <div class="select_item">
-                  <span>天气原因</span>
-                </div>
+<!--                <div class="select_item">-->
+<!--                  <span>吃饭</span>-->
+<!--                </div>-->
+<!--                <div class="select_item" style="background-color: #009CFF">-->
+<!--                  <span>干零活</span>-->
+<!--                </div>-->
+<!--                <div class="select_item">-->
+<!--                  <span>加油</span>-->
+<!--                </div>-->
+<!--                <div class="select_item">-->
+<!--                  <span>加油</span>-->
+<!--                </div>-->
+<!--                <div class="select_item">-->
+<!--                  <span>避炮</span>-->
+<!--                </div>-->
+<!--                <div class="select_item">-->
+<!--                  <span>正常停机</span>-->
+<!--                </div>-->
+<!--                <div class="select_item">-->
+<!--                  <span>天气原因</span>-->
+<!--                </div>-->
               </el-card>
             </div>
           </div>
@@ -94,11 +90,11 @@
       <div class="con_result">
         <div class="result1">
           <span>即将对>>  </span>
-          <span>矿车#2</span>
+          <span>{{ targetSelect }}</span>
         </div>
         <div class="result2">
           <span>下达指令>>  </span>
-          <span>干零活</span>
+          <span>{{ commandSelect }}</span>
         </div>
         <el-button color="#626aef" plain size="large">下达强制命令</el-button>
       </div>
@@ -107,7 +103,79 @@
 
 <script>
 export default {
-  name: "qiangCommand"
+  name: "qiangCommand",
+  data(){
+    return{
+      target_arr : [
+        {
+          name : '矿车#1',
+          isActive : true,
+        },
+        {
+          name : '矿车#2',
+          isActive : false,
+        },
+        {
+          name : '装卸点#1',
+          isActive : false,
+        },
+        {
+          name : '装卸点#2',
+          isActive : false,
+        }
+      ],
+      command_arr: [
+        {
+          name : '吃饭',
+          isActive : false,
+        },
+        {
+          name : '干零活',
+          isActive : true,
+        },
+        {
+          name : '加油',
+          isActive : false,
+        },
+        {
+          name : '避炮',
+          isActive : false,
+        },
+        {
+          name : '正常停机',
+          isActive : false,
+        },
+        {
+          name : '天气原因',
+          isActive : false,
+        }
+      ],
+      targetSelect:"矿车#1",
+      commandSelect:"干零活",
+    }
+  },
+  methods: {
+    target_select(index) {
+      this.targetSelect = this.target_arr[index].name;
+      for (let i in this.target_arr) {
+        if (index == i) {
+          this.target_arr[i].isActive = !this.target_arr[i].isActive;
+        } else {
+          this.target_arr[i].isActive = false;
+        }
+      }
+    },
+    command_select(index) {
+      this.commandSelect = this.command_arr[index].name;
+      for (let i in this.command_arr) {
+        if (index == i) {
+          this.command_arr[i].isActive = !this.command_arr[i].isActive;
+        } else {
+          this.command_arr[i].isActive = false;
+        }
+      }
+    },
+  }
 }
 </script>
 
@@ -212,8 +280,7 @@ import { Remove, Refresh } from '@element-plus/icons-vue'
                 font-size: 18px;
                 height: 40px;
                 line-height: 40px;
-                text-align: left;
-                padding-left: 25px;
+                text-align: center;
               }
               .select_item:hover{
                 background-color:#C0C4CC  !important;
@@ -292,8 +359,7 @@ import { Remove, Refresh } from '@element-plus/icons-vue'
               font-size: 18px;
               height: 40px;
               line-height: 40px;
-              text-align: left;
-              padding-left: 25px;
+              text-align: center;
             }
 
             .select_item:hover {
